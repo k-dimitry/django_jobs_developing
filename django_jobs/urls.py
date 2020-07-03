@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path
 
 from jobs.views import IndexView, VacanciesView, VacanciesCategoryView, CompanyView, VacancyView, CreateCompanyView, \
-    CompaniesView, custom_handler404, custom_handler500
+    CompaniesView, custom_handler404, custom_handler500, AboutView
 
 handler404 = custom_handler404
 handler500 = custom_handler500
@@ -30,5 +30,6 @@ urlpatterns = [
     path('vacancies/<int:vacancy_id>', VacancyView.as_view()),
     path('companies', CompaniesView.as_view()),
     path('create', CreateCompanyView.as_view()),
+    path('about', AboutView.as_view()),
     path('admin/', admin.site.urls),
 ]

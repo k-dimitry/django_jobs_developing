@@ -34,7 +34,6 @@ class VacanciesView(View):
 
 class VacanciesCategoryView(View):
     def get(self, request, vacancy_category):
-
         # Создаём список со всеми категориями из базы
         specialties_codes_list = [spec.code for spec in Specialty.objects.all()]
 
@@ -51,7 +50,6 @@ class VacanciesCategoryView(View):
 
 class CompanyView(View):
     def get(self, request, company_id):
-
         # Создаём список всех id компаний из базы
         companies_ids_list = [comp.id for comp in Company.objects.all()]
 
@@ -68,7 +66,6 @@ class CompanyView(View):
 
 class VacancyView(View):
     def get(self, request, vacancy_id):
-
         # Создаём список со всеми id вакансий из базы
         vacancies_ids_list = [job.id for job in Vacancy.objects.all()]
 
@@ -92,3 +89,8 @@ class CompaniesView(View):
             "companies": Company.objects.all(),
         }
         return render(request, "companies.html", context)
+
+
+class AboutView(View):
+    def get(self, request):
+        return render(request, "about.html")
