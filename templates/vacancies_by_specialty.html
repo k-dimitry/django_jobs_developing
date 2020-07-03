@@ -3,17 +3,10 @@
 {% block content %}
 
     <main class="container mt-3">
-        <div class="navbar mt-5">
-            <p><a href="#" onClick="javascript:history.go(-1);">Назад</a></p>
-        </div>
         <section>
-                    <div class="text-center">
-                        <img src="{{ company.logo }}" width="130" height="80" alt="">
-                    </div>
-                    <h1 class="h1 text-center mx-auto mt-0 pt-1" style="font-size: 70px;"><strong
-                            style="text-transform: capitalize;">{{ company.name }}</strong></h1>
-                    <p class="text-center pt-1">Компания, {{ jobs.count }} вакансий</p>
-
+            <h1 class="h1 text-center mx-auto mt-4 pt-5" style="font-size: 70px;"><strong>{{ specialty_title }}</strong>
+            </h1>
+            <p class="text-center pt-1">{{ jobs.count }} вакансий</p>
             <div class="row mt-5">
                 <div class="col-12 col-lg-8 offset-lg-2 m-auto">
                     {% for job in jobs %}
@@ -23,11 +16,12 @@
                                         <div class="col-12 col-md-8 col-lg-9">
                                             <a href="/vacancies/{{ job.id }}"><h2 class="h2 pb-2">{{ job.title }}</h2></a>
                                             <p class="mb-2">{{ job.skills }}</p>
-                                            <p>От {{ job.salary_min }} до {{ job.salary_min }} руб.</p>
+                                            <p>От {{ job.salary_min }} до {{ job.salary_max }} руб.</p>
                                             <p class="text-muted pt-1">{{ job.published_at }}</p>
                                         </div>
                                         <div class="col-12 col-md-4 col-lg-3 d-flex align-items-end">
-                                            <img src="{{ company.logo }}" width="130" height="80" alt="">
+                                            <a href="#"><img src="{{ job.company.logo}}" width="130" height="80"
+                                                             alt=""></a>
                                         </div>
                                     </div>
                                 </div>

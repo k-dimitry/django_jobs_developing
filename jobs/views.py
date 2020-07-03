@@ -29,22 +29,36 @@ class VacanciesView(View):
         context = {
             "jobs": Vacancy.objects.all(),
         }
-        return render(request, "all_vacancies.html", context)
+        return render(request, "vacancies.html", context)
 
 
 class VacanciesCategoryView(View):
     def get(self, request, vacancy_category):
+
+        # Создаём список со всеми категориями из базы
+        specialties_codes_list = [spec.code for spec in Specialty.objects.all()]
+
+        # Проверяем, что у нас есть запрошенная категория
+        if vacancy_category not in specialties_codes_list:
+            raise Http404
+
         context = {
             "jobs": Vacancy.objects.filter(specialty__code__contains=vacancy_category),
             "specialty_title": Specialty.objects.filter(code__contains=vacancy_category).first().title
         }
-        return render(request, "vacancies.html", context)
+        return render(request, "vacancies_by_specialty.html", context)
 
 
 class CompanyView(View):
     def get(self, request, company_id):
-        if company_id not in range(1, Company.objects.all().count() + 1):
+
+        # Создаём список всех id компаний из базы
+        companies_ids_list = [comp.id for comp in Company.objects.all()]
+
+        # Проверяем, что у нас есть компания с запрошенным id
+        if company_id not in companies_ids_list:
             raise Http404
+
         context = {
             "company": Company.objects.get(id=company_id),
             "jobs": Vacancy.objects.filter(company__id=company_id),
@@ -54,7 +68,12 @@ class CompanyView(View):
 
 class VacancyView(View):
     def get(self, request, vacancy_id):
-        if vacancy_id not in range(1, Vacancy.objects.all().count() + 1):
+
+        # Создаём список со всеми id вакансий из базы
+        vacancies_ids_list = [job.id for job in Vacancy.objects.all()]
+
+        # Проверяем, что у нас есть вакансия с запрошенным id
+        if vacancy_id not in vacancies_ids_list:
             raise Http404
         context = {
             "job": Vacancy.objects.get(id=vacancy_id)
@@ -72,4 +91,4 @@ class CompaniesView(View):
         context = {
             "companies": Company.objects.all(),
         }
-        return render(request, "all_companies.html", context)
+        return render(request, "companies.html", context)

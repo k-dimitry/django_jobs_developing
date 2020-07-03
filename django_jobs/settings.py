@@ -22,7 +22,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '%((g^@_2*q(%_77!@u)%x51sr!xcmm$h3demr7yhh^#wgt=$)m'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 
@@ -36,8 +36,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    # my apps:
+    # third-party:
+    'crispy_forms',
     'django_extensions',
+
+    # my apps:
     'jobs',
 ]
 

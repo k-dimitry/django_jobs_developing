@@ -48,18 +48,20 @@ def populate_db():
 
     """
     for specialty in data.specialties:
-        Specialty.objects.create(title=specialty.get("title"),
-                                 code=specialty.get("code"),
-                                 picture=specialty.get("picture")
-                                 )
+        Specialty.objects.create(
+            title=specialty.get("title"),
+            code=specialty.get("code"),
+            picture=specialty.get("picture")
+        )
 
     for company in data.companies:
-        Company.objects.create(name=company.get("title"),
-                               location=company.get("location"),
-                               logo=company.get("logo"),
-                               description=company.get("description"),
-                               employee_count=company.get("employee_count")
-                               )
+        Company.objects.create(
+            name=company.get("title"),
+            location=company.get("location"),
+            logo=company.get("logo"),
+            description=company.get("description"),
+            employee_count=company.get("employee_count")
+        )
 
     for job in data.jobs:
         Vacancy.objects.create(
